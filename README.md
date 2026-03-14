@@ -9,7 +9,7 @@ This project is a backend API for creating **Critical Editions** of texts from m
 - **ASGI Server**: Uvicorn
 - **Database / ORM**: SQLAlchemy
 - **Rate Limiting**: slowapi
-- **Config & Utils**: python-dotenv, validators
+- **Config & Utils**: validators
 - **Collation Engine**: Pydurma (via GitHub)
 
 ### Features (Planned / Implemented)
