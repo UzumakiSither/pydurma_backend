@@ -6,6 +6,7 @@ from pydurma_app.core.security import hash_password
 
 
 def seed_users(db: Session):
+    """Seed the database with default users for local development."""
 
     existing_user = db.query(User).filter(
         User.username == "admin"

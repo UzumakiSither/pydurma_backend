@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     db_url: str
     secret_key: str
     algorithm: str = "HS256"
-    token_expire_hours: int = 12
+    token_expire_hours: int = 2
     
     model_config = {"env_file": ".env", "case_sensitive": False}
 
@@ -19,5 +19,3 @@ def get_settings() -> Settings:
     settings = Settings()
     print(f"Loading settings for: {settings.env_name}")
     return settings
-
-

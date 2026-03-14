@@ -27,21 +27,22 @@ class CollateRequest(BaseModel):
 class CollateCreateResponse(BaseModel):
     id: int
     status: str
-    result: str
+    result: Any
 
 
 class CollationHistoryItem(BaseModel):
     id: int
     status: str
     created_at: datetime
+    output_type: Optional[str] = None
 
 
 class CollationDetailResponse(BaseModel):
     id: int
     status: str
     input_texts: Optional[list[str]] = None
-    input_raw: Optional[str] = None
-    result_text: Optional[str] = None
+    output_type: Optional[str] = None
+    result: Optional[Any] = None
     weighted_matrix: Optional[Any] = None
     error_message: Optional[str] = None
     error_trace: Optional[str] = None

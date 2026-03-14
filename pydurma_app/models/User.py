@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy.sql import func
 from datetime import datetime
 
 from pydurma_app.db.database import Base
@@ -11,4 +12,4 @@ class User(Base):
     username = Column(String, unique=True, index=True)
     email = Column(String, unique=True)
     password_hash = Column(String)
-    created_at = Column(DateTime, default=datetime.now)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())

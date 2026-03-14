@@ -31,7 +31,7 @@ source venv/bin/activate  # on Windows: venv\Scripts\activate
 2. **Install dependencies**:
 
 ```bash
-python -m pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 3. **Run the development server** (adjust the module path if different):
@@ -82,8 +82,11 @@ In Swagger UI (`/docs`), click **Authorize** and paste `Bearer <access_token>`.
   - Success response includes `{ id, status, result }`
   - Failures are persisted with `status="failure"` and include trace/error details
 
+- **Export collation**
+  - `GET /collate/{collation_id}/download` -> download as file (only if owned by JWT user)
+
 - **History**
-  - `GET /collate/history` → list of `{ id, status, created_at }`
+  - `GET /collate/history` → list of `{ id, status, created_at, output_type }`
 
 - **Get one by id**
   - `GET /collate/{collation_id}` → full saved record (only if owned by JWT user)
@@ -92,5 +95,36 @@ In Swagger UI (`/docs`), click **Authorize** and paste `Bearer <access_token>`.
 
 - Make Pydurma’s collation functionality accessible via a web API.
 - Focus on backend logic and API structure (no frontend required).
-- Keep the design simple but extensible for future features (rate limiting, advanced exports, etc.).
+- Keep the design simple but extensible for future features (more exports type).
 
+## Note
+
+If you encounter issues cloning or installing the **pydurma** library on Windows due to file names that end with a space (which work on Linux-based systems but not on Windows), you can install and run the project using **WSL (Windows Subsystem for Linux)**.
+
+```bash
+# Install WSL
+- Open windows powershell
+wsl --install
+
+# After installation, set your Linux username and password when prompted
+# System restart might be required
+# Open ubuntu
+
+# Update the system
+sudo apt update
+sudo apt upgrade -y
+
+# Install required tools
+sudo apt install python3 python3-pip python3-venv git build-essential -y
+
+# Verify installations
+python3 --version
+pip3 --version
+git --version
+
+# Install PostgreSQL
+sudo apt install postgresql postgresql-contrib
+
+# If you encounter issues installing some Python dependencies, try this and then install the requirements again
+pip install "setuptools<70"
+pip install --no-build-isolation pyewts==0.2.0

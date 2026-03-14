@@ -1,6 +1,6 @@
 from passlib.context import CryptContext
 from jose import jwt
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from pydurma_app.config import get_settings
 
@@ -26,7 +26,7 @@ def create_access_token(user_id: int):
 
     payload = {
         "sub": str(user_id),
-        "exp": datetime.utcnow() + timedelta(hours=TOKEN_EXPIRE_HOURS)
+        "exp": datetime.now(timezone.utc) + timedelta(hours=TOKEN_EXPIRE_HOURS)
     }
 
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
